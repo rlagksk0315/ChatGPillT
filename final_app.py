@@ -8,6 +8,7 @@ import openai
 from openai import OpenAI
 import requests
 import re
+import os
 
 if 'input_key' not in st.session_state:
     st.session_state.input_key = 0
@@ -31,8 +32,8 @@ def image_to_base64(image: Image.Image) -> str:
     image.save(buffered, format="PNG")
     return base64.b64encode(buffered.getvalue()).decode("utf-8")
 
-OPENAI_API_KEY = "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"
-client = OpenAI(api_key = OPENAI_API_KEY)
+api_key = os.getenv('OPENAI_API_KEY')
+client = OpenAI(api_key = api_key)
 
 #------------------------------------------------------------------------------------------------
 #식약처 의약품안전사용서비스(DUR) 품목 정보
